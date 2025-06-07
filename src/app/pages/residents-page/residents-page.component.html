@@ -1,0 +1,105 @@
+<section class="common-page">
+    @if (currentModal === 'add') {
+    <div class="common-modal">
+        <app-add-residents-modal (close)="closeModal()" (residentAdded)="getResidents()"></app-add-residents-modal>
+    </div>
+    }
+    @if (currentModal === 'delete') {
+    <div class="common-modal">
+        <app-generic-modal title="Remover Morador"
+            description="Essa ação é irreversível. Todos os dados e associações, incluindo usuários vinculados, serão permanentemente removidos do sistema. Tem certeza de que deseja continuar?"
+            submitLabel="Remover" cancelLabel="Cancelar" type="WARNING"
+            [isLoading] = "isModalLoading"
+            (onSubmit)="deleteResident()"
+            (onCancel)="closeModal()"
+            >
+        </app-generic-modal>
+    </div>
+    }
+
+    <div class="resident">
+        <div class="header">
+            <h2>Moradores</h2>
+            <div class="actions">
+                <button (click)="openModal('add')" class="add-resident">
+                    <span class="material-icons">add</span>
+                    Novo Morador
+                </button>
+            </div>
+        </div>
+        <div class="filters">
+            <input type="text" placeholder="Buscar moradores..." />
+            <select>
+                <option>Filtrar por status</option>
+            </select>
+        </div>
+        <div>
+            <table class="resident-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Apartamentos</th>
+                        <th>Contato</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (isLoading) {
+                    <tr>
+                        <td colspan="5">
+                            <div style="display: flex; justify-content: center; align-items: center; height: 800px;">
+                                <app-main-spinner [size]="72"></app-main-spinner>
+                            </div>
+                        </td>
+                    </tr>
+                    }@else {
+                    @for (item of residents; track item.id) {
+                    <tr>
+                        <td>
+                            <div class="name-cell">
+                                <div class="avatar">JS</div>
+                                <div>
+                                    <strong>{{item.firstName}} {{item.lastName}}</strong><br />
+                                    <span>{{item.email}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ item.cpf | cpfFormat }}</td>
+                        <td>
+                            <div class="apt-list">
+                                @if (!item.apartmentAsResident.length && !item.apartmentAsVisitor.length) {
+                                <span class="no-apartments">—</span>
+                                } @else {
+                                <div class="apt-list">
+                                    @for(apt of item.apartmentAsResident; track apt.id) {
+                                    <div class="apt-r-container">
+                                        <span class="apt-resident">🏠 T{{apt.tower.number}} - {{apt.number}}</span>
+                                    </div>
+                                    }
+                                    @for(apt of item.apartmentAsVisitor; track apt.id) {
+                                    <div class="apt-v-container">
+                                        <span class="apt-visitor">🧳 T{{apt.tower.number}} - {{apt.number}}</span>
+                                    </div>
+                                    }
+                                </div>
+                                }
+                            </div>
+                        </td>
+                        <td>{{ item.phone | phoneFormat }}</td>
+                        <td class="actions">
+                            <span>
+                                ✏️
+                            </span>
+                            <span (click)="setupResidentToDelete(item.id)">
+                                🗑️
+                            </span>
+                        </td>
+                    </tr>
+                    }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,9 @@
+@if(visible) {
+  <div [class]="toastClass" [class.hide]="isHiding">
+    <div class="toast-icon">{{ icon }}</div>
+    <div class="toast-content">
+      <strong class="toast-title">{{ title }}</strong>
+      <p class="toast-message">{{ message }}</p>
+    </div>
+  </div>
+}

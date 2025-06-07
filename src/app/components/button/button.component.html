@@ -1,0 +1,3 @@
+<button [ngClass]="{'primary': type === 'primary', 'secondary': type === 'secondary', 'delete': type === 'delete'}" [disabled]="disabled" (click)="handleClick()">
+    <ng-content></ng-content>
+</button>

@@ -1,0 +1,8 @@
+<div class="card">
+  <p class="title">{{ title }}</p>
+  @if(isLoading) {
+      <app-main-spinner [size]=32></app-main-spinner>
+  }@else {
+    <p class="value" [style.color]="color">{{ value }}</p>
+  }
+</div>

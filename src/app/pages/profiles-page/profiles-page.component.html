@@ -1,0 +1,27 @@
+<section class="common-page">
+    <div class="profile">
+        <div class="header">
+            <div class="header-title">
+                <h2>Perfis de Usuário</h2>
+                <span>Gerencie perfis e permissões do sistema</span>
+            </div>
+            <div class="actions">
+                <button class="add-profile">
+                    <span class="material-icons">add</span>
+                    Adicionar Perfil
+                </button>
+            </div>
+        </div>
+        <div class="filters">
+            <input type="text" placeholder="Buscar perfil..." />
+            <select>
+                <option>Filtrar por permissão</option>
+            </select>
+        </div>
+        <div class="content">
+            @for (item of profiles; track item.id) {
+            <app-profile-card [profile]="item"> </app-profile-card>
+            }
+        </div>
+    </div>
+</section>

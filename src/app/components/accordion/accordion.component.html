@@ -1,0 +1,13 @@
+<div class="accordion-container">
+  <button class="accordion-header" (click)="toggle()">
+    <div class="text">
+      <h2>{{ title }}</h2>
+      <p *ngIf="subtitle">{{ subtitle }}</p>
+    </div>
+    <div class="icon">{{ isOpen ? '−' : '+' }}</div>
+  </button>
+
+  <div class="accordion-body" *ngIf="isOpen">
+    <ng-content></ng-content>
+  </div>
+</div>

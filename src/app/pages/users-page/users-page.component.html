@@ -1,0 +1,51 @@
+<section class="common-page">
+    <div class="user">
+        <div class="header">
+            <h2>Usuários</h2>
+            <div class="actions">
+                <button class="add-user">
+                    <span class="material-icons">add</span>
+                    Novo Usuário
+                </button>
+            </div>
+        </div>
+        <div class="filters">
+            <input type="text" placeholder="Buscar usuários..." />
+            <select>
+                <option>Filtrar por status</option>
+            </select>
+        </div>
+        <div>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Perfil</th>
+                        <th>Último Acesso</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of users; track item.name) {
+                    <tr>
+                        <td>
+                            <div class="name-cell">
+                                <div class="avatar">JS</div>
+                                <div>
+                                    <strong>{{item.name}}</strong><br />
+                                    <span>{{item.email}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{item.profile}}</td>
+                        <td>{{item.lastAccess}}</td>
+                        <td class="actions">
+                            ✏️ 🗑️
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

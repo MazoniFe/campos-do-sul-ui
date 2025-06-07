@@ -1,0 +1,52 @@
+<section class="common-page">
+    <div class="settings">
+        <div class="header">
+            <div class="header-title">
+                <h2>Configurações</h2>
+                <span>Gerencie perfis e permissões do sistema</span>
+            </div>
+            <div class="actions">
+                <button class="add-settings">
+                    <span class="material-icons">add</span>
+                    Adicionar Perfil
+                </button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="sections-header">
+                <button (click)="onSelect(0)" [ngClass]="{ 'active-tab': currentSection.index === 0 }">
+                    Meu Perfil
+                </button>
+                <button (click)="onSelect(1)" [ngClass]="{ 'active-tab': currentSection.index === 1 }">
+                    Condominio
+                </button>
+                <!-- <button (click)="onSelect(2)" [ngClass]="{ 'active-tab': currentSection.index === 2 }">
+                    Sistema
+                </button>
+                <button (click)="onSelect(3)" [ngClass]="{ 'active-tab': currentSection.index === 3 }">
+                    Segurança
+                </button> -->
+            </div>
+
+            <div class="section-content">
+                @switch (currentSection.index) {
+                @case (0) {
+                <app-settings-profile-section></app-settings-profile-section>
+                }
+                @case (1) {
+                <app-settings-condominium-section></app-settings-condominium-section>
+                }
+                <!-- @case (2) {
+                <div>SECTION 3</div>
+                }
+                @case (3) {
+                <div>SECTION 4</div>
+                } -->
+                @default {
+                <div>SECTION 1</div>
+                }
+                }
+            </div>
+        </div>
+    </div>
+</section>

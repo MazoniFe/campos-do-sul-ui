@@ -1,0 +1,15 @@
+<div class="main-container">
+    <app-menu-profile></app-menu-profile>
+    <nav class="main-nav">
+        <ul class="menu-list">
+            @for (item of menuList; track item.name) {
+            <li>
+                <button (click)="selectMenuItem(item)" [class.active]="item.selected" class="menu-button">
+                    <span class="material-icons">{{ item.icon }}</span>
+                    <span>{{ item.name }}</span>
+                </button>
+            </li>
+            }
+        </ul>
+    </nav>
+</div>

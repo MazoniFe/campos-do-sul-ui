@@ -1,0 +1,81 @@
+<section class="common-page">
+    <div class="apartment">
+        <div class="header">
+            <h2>Veículos</h2>
+        </div>
+        <div class="filters">
+            <input type="text" placeholder="Buscar veículos..." />
+            <select>
+                <option>filtrar</option>
+            </select>
+        </div>
+        <div class="status-grid">
+            <app-simple-status-card title="Total de Veículos" [value]="4" color="blue"></app-simple-status-card>
+            <app-simple-status-card title="Carros" [value]="7" color="green"></app-simple-status-card>
+            <app-simple-status-card title="Motos" [value]="3" color="red"></app-simple-status-card>
+        </div>
+        <div class="content">
+            <table class="apartment-table">
+                <thead>
+                    <tr>
+                        <th>Placa</th>
+                        <th>Veículo</th>
+                        <th>Proprietário</th>
+                        <th>Apartamento</th>
+                        <th>Vaga</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of vehicles; track item.id) {
+                    <tr>
+                        <td>
+                            <div class="name-cell">
+                                <div class="avatar">
+                                    @if(item.type === 'CAR') {
+                                    <span class="material-icons">directions_car</span>
+                                    } @else {
+                                    <span class="material-icons">motorcycle</span>
+                                    }
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap:6px">
+                                    <span>{{ item.licensePlate }}</span>
+                                    <span>{{ item.type }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="vehicle-details">
+                                <span>
+                                    {{item.model}}
+                                </span>
+                                <span>
+                                    {{item.color}}
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <span>
+                                {{item.owner}}
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                {{item.apartment}}
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                {{item.garage}}
+                            </span>
+                        </td>
+                        <td class="actions">
+                            ✏️ 🗑️
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

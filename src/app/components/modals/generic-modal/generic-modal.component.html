@@ -1,0 +1,21 @@
+<div class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="modal-icon">{{ getIcon() }}</span>
+            <h2>{{ title }}</h2>
+        </div>
+        <div class="modal-body">
+            <p>{{ description }}</p>
+        </div>
+        <div class="modal-footer">
+            @if(isLoading) {
+                <div style="width: 100%;">
+                    <app-main-spinner></app-main-spinner>
+                </div>
+            }@else {
+                <app-button type="delete" (click)="onSubmit.emit()">{{ submitLabel }}</app-button>
+                <app-button type="secondary" (click)="onCancel.emit()">{{ cancelLabel }}</app-button>
+            }
+        </div>
+    </div>
+</div>

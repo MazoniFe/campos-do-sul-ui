@@ -1,0 +1,23 @@
+<div class="form-container" [formGroup]="condominioForm">
+  <h2>Dados do Condomínio</h2>
+  <p class="subtitle">Informações gerais do condomínio</p>
+
+  <div class="form-group">
+    <label for="nome">Nome do Condomínio</label>
+    <input id="nome" type="text" formControlName="nome" />
+  </div>
+
+  <div class="form-group">
+    <label for="cnpj">CNPJ</label>
+    <input id="cnpj" type="text" formControlName="cnpj" mask="00.000.000/0000-00" placeholder="00.000.000/0000-00" />
+  </div>
+
+  <div class="form-group">
+    <label for="endereco">Endereço</label>
+    <input id="endereco" type="text" formControlName="endereco" />
+  </div>
+
+  <button type="button" (click)="onSubmit()" [disabled]="condominioForm.invalid">
+    Salvar Alterações
+  </button>
+</div>

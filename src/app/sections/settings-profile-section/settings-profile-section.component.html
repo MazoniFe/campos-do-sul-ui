@@ -1,0 +1,28 @@
+<div class="form-container" [formGroup]="condominioForm">
+  <h2>Dados do Usuário</h2>
+  <p class="subtitle">Informações pessoais</p>
+
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input id="name" type="text" formControlName="name" placeholder="Digite o nome do condomínio" />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email" placeholder="exemplo@dominio.com" />
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Telefone</label>
+    <input id="phone" type="text" formControlName="phone" placeholder="(00) 00000-0000" mask="(00) 00000-0000" />
+  </div>
+
+  <div class="form-group">
+    <label for="cpf">CPF</label>
+    <input id="cpf" type="text" formControlName="cpf" placeholder="000.000.000-00" mask="000.000.000-00" />
+  </div>
+
+  <button type="button" (click)="onSubmit()" [disabled]="condominioForm.invalid">
+    Salvar Alterações
+  </button>
+</div>
