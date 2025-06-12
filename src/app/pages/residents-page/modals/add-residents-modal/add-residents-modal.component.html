@@ -1,0 +1,46 @@
+<div class="modal" [ngClass]="{ loading: !isLoading }">
+    <div class="form-container" [formGroup]="residentForm">
+        <h2>Dados do Morador</h2>
+        <p class="subtitle">Informações pessoais</p>
+
+        <div class="form-group">
+            <label for="firstName">Nome</label>
+            <input id="firstName" type="text" formControlName="firstName" placeholder="Digite o nome" [ngClass]="{ 'input-loading': isLoading }"/>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Sobrenome</label>
+            <input id="lastName" type="text" formControlName="lastName" placeholder="Digite o sobrenome" [ngClass]="{ 'input-loading': isLoading }"/>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" formControlName="email" placeholder="exemplo@dominio.com" [ngClass]="{ 'input-loading': isLoading }"/>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Telefone</label>
+            <input id="phone" type="text" formControlName="phone" placeholder="(51) 91234-1234" mask="(00) 00000-0000"  [ngClass]="{ 'input-loading': isLoading }"/>
+        </div>
+
+        <div class="form-group">
+            <label for="cpf">CPF</label>
+            <input id="cpf" type="text" formControlName="cpf" mask="000.000.000-00" [ngClass]="{ 'input-loading': isLoading }"/>
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate">Data de Nascimento</label>
+            <input id="birthDate" type="text" formControlName="birthDate" placeholder="23/07/1999" mask="00/00/0000" [ngClass]="{ 'input-loading': isLoading }"/>
+        </div>
+
+        @if(isLoading) {
+            <app-main-spinner></app-main-spinner>
+        }@else {
+        <div class="buttons">
+            <app-button type="primary" [disabled]="residentForm.invalid" (action)="onSubmit()">Salvar
+                Alterações</app-button>
+            <app-button type="secondary" (action)="onClose()">Cancelar</app-button>
+        </div>
+        }
+    </div>
+</div>

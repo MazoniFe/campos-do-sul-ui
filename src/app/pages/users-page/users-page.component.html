@@ -1,9 +1,15 @@
 <section class="common-page">
+    @if (currentModal === 'add') {
+    <div class="common-modal">
+        <app-add-users-modal (close)="closeModal()" (userUpdated)="getUsers()"></app-add-users-modal>
+    </div>
+    }
+
     <div class="user">
         <div class="header">
             <h2>Usuários</h2>
             <div class="actions">
-                <button class="add-user">
+                <button (click)="openModal('add')" class="add-user">
                     <span class="material-icons">add</span>
                     Novo Usuário
                 </button>
@@ -26,26 +32,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (item of users; track item.name) {
+                    @if (isLoading) {
                     <tr>
-                        <td>
-                            <div class="name-cell">
-                                <div class="avatar">JS</div>
-                                <div>
-                                    <strong>{{item.name}}</strong><br />
-                                    <span>{{item.email}}</span>
-                                </div>
+                        <td colspan="5">
+                            <div style="display: flex; justify-content: center; align-items: center; height: 800px;">
+                                <app-main-spinner [size]="72"></app-main-spinner>
                             </div>
                         </td>
-                        <td>{{item.profile}}</td>
-                        <td>{{item.lastAccess}}</td>
-                        <td class="actions">
-                            ✏️ 🗑️
-                        </td>
                     </tr>
+                    } @else {
+                    @for (item of users; track item.id) {
+                        <tr>
+                            <td>
+                                <div class="name-cell">
+                                    <div class="avatar">JS</div>
+                                    <div>
+                                        <strong>{{item.person.firstName}} {{item.person.lastName}}</strong><br />
+                                        <span>{{item.person.email}}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{item.profile.name}}</td>
+                            <td>{{item.person.createdAt}}</td>
+                            <td class="actions">
+                                <span>
+                                    ✏️
+                                </span>
+                                <span>
+                                    🗑️
+                                </span>
+                            </td>
+                        </tr>
+                        }
                     }
+
                 </tbody>
             </table>
         </div>
     </div>
-</section>
+</section>c

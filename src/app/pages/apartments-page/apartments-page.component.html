@@ -4,16 +4,29 @@
             <h2>Apartamentos</h2>
         </div>
         <div class="filters" [ngClass]="{ 'form-disabled': isLoading }">
-            <input type="text" placeholder="Buscar apartmentos..." />
-            <select (change)="onTowerChange($event)" aria-placeholder="Filtrar por Torre">
-                @for (item of towers; track item.id) {
-                @if (item.number === 0) {
-                <option value=""></option>
-                } @else {
-                <option [value]="item">{{ item.number }}</option>
-                }
-                }
-            </select>
+            <input #apartmentInput type="text" placeholder="Buscar apartamentos..." />
+            <div style="display: flex; gap: 10px; align-items: center; flex: 1;">
+                <div style="width: 100%; display: flex; align-items: center; gap: 12px;">
+                    <label for="towerFilter">Torre</label>
+                    <select style="width: 100%;" [(ngModel)]="selectedTower" (change)="onTowerChange(selectedTower)">
+                        @for (item of towers; track 'tower_' + item.id) {
+                        @if (item.number === 0) {
+                        <option [ngValue]="null">Todas</option>
+                        } @else {
+                        <option [ngValue]="item">{{ item.number }}</option>
+                        }
+                        }
+                    </select>
+                </div>
+                <div style="width: 100%; display: flex; align-items: center; gap: 12px;">
+                    <label for="statusFilter">Status</label>
+                    <select style="width: 100%;" [(ngModel)]="selectedStatus" (change)="onStatusChange(selectedStatus)">
+                        @for (item of availableStatus; track $index) {
+                        <option [ngValue]="item">{{ getStatusTranslation(item) }}</option>
+                        }
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="status-grid">
             <app-simple-status-card [isLoading]="isLoading" title="Ocupados" [value]="35"
@@ -29,7 +42,7 @@
                     <tr>
                         <th>Apartmento</th>
                         <th>Proprietário</th>
-                        <th>Inquilino</th>
+                        <th>Vaga Garagem</th>
                         <th>Status</th>
                         <th>Area</th>
                         <th>Ações</th>
@@ -45,44 +58,45 @@
                         </td>
                     </tr>
                     } @else {
-                        @for (item of apartments; track item.number) {
-                        <tr>
-                            <td>
-                                <div class="name-cell">
-                                    <div class="avatar">
-                                        <span class="material-icons">home</span>
-                                    </div>
-                                    <div style="display: flex; flex-direction: column; gap:6px">
-                                        <span>Torre: {{ item.tower }}</span>
-                                        <span>Apartamento: {{ item.number }}</span>
-                                    </div>
+                    @for (item of filteredApartments; track 'apartment_' + item.id) {
+                    <tr>
+                        <td>
+                            <div class="name-cell">
+                                <div class="avatar">
+                                    <span class="material-icons">home</span>
                                 </div>
-                            </td>
-                            <td>
-                                <span>
-                                    {{item.owner}}
-                                </span>
-                            </td>
-                            <td>
-                                <span>
-                                    {{item.inq}}
-                                </span>
-                            </td>
-                            <td>
-                                <span>
-                                    ATIVO
-                                </span>
-                            </td>
-                            <td>
-                                <span>
-                                    85m²
-                                </span>
-                            </td>
-                            <td class="actions">
-                                ✏️ 🗑️
-                            </td>
-                        </tr>
-                        }
+                                <div style="display: flex; flex-direction: column; gap:6px">
+                                    <span>Torre: {{ item.towerNumber ? (item.towerNumber) : 'Não informado' }}</span>
+                                    <span>Apartamento: {{ item.number ? (item.number) : 'Não informado'}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span>
+                                {{ item.owner_name ? (item.owner_name)
+                                : 'Não informado' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                {{item.garage_number ? (item.garage_number) : 'Não informado'}}
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                {{getStatusTranslation(item.status)}}
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                85m²
+                            </span>
+                        </td>
+                        <td class="actions">
+                            ✏️ 🗑️
+                        </td>
+                    </tr>
+                    }
                     }
                 </tbody>
             </table>

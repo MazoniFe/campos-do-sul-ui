@@ -65,14 +65,13 @@ button {
 }
 
 .filters input {
-    width: 75%;
+    width: 50%;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #ccc;
 }
 
 .filters select {
-    width: 25%;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #ccc;

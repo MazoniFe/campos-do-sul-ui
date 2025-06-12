@@ -6,7 +6,7 @@ import { IUserResponseMetaData, IUser, IInsertUser, IUpdateUser } from './types'
 @Injectable({
   providedIn: 'root'
 })
-export class VehicleService {
+export class UserService {
   private restCallService = inject(RestCallService);
   constructor() { }
 

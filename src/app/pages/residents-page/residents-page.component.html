@@ -1,18 +1,20 @@
 <section class="common-page">
     @if (currentModal === 'add') {
     <div class="common-modal">
-        <app-add-residents-modal (close)="closeModal()" (residentAdded)="getResidents()"></app-add-residents-modal>
+        <app-add-residents-modal (close)="closeModal()" (residentUpdated)="getResidents()"></app-add-residents-modal>
+    </div>
+    }
+    @if (currentModal === 'edit') {
+    <div class="common-modal">
+        <app-edit-residents-modal [selectedResidentId]="selectedResidentId" (close)="closeModal()" (residentUpdated)="getResidents()"></app-edit-residents-modal>
     </div>
     }
     @if (currentModal === 'delete') {
     <div class="common-modal">
         <app-generic-modal title="Remover Morador"
             description="Essa ação é irreversível. Todos os dados e associações, incluindo usuários vinculados, serão permanentemente removidos do sistema. Tem certeza de que deseja continuar?"
-            submitLabel="Remover" cancelLabel="Cancelar" type="WARNING"
-            [isLoading] = "isModalLoading"
-            (onSubmit)="deleteResident()"
-            (onCancel)="closeModal()"
-            >
+            submitLabel="Remover" cancelLabel="Cancelar" type="WARNING" [isLoading]="isModalLoading"
+            (onSubmit)="deleteResident()" (onCancel)="closeModal()">
         </app-generic-modal>
     </div>
     }
@@ -88,7 +90,7 @@
                         </td>
                         <td>{{ item.phone | phoneFormat }}</td>
                         <td class="actions">
-                            <span>
+                            <span (click)="setupResidentToUpdate(item.id)">
                                 ✏️
                             </span>
                             <span (click)="setupResidentToDelete(item.id)">

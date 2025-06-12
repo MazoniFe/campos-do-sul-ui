@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AddResidentsModalComponent } from "../../components/modals/add-residents-modal/add-residents-modal.component";
+import { AddResidentsModalComponent } from "./modals/add-residents-modal/add-residents-modal.component";
 import { IPersonDetailed } from '../../services/person/types';
 import { PersonService } from '../../services/person/person.service';
 import { PhoneFormatPipe } from "../../pipes/phone-format/phone-format.pipe";
@@ -8,37 +8,48 @@ import { CpfFormatPipe } from '../../pipes/cpf-format/cpf-format.pipe';
 import { MainSpinnerComponent } from "../../components/main-spinner/main-spinner.component";
 import { GenericModalComponent } from "../../components/modals/generic-modal/generic-modal.component";
 import { ToastService } from '../../services/toast/toast.service';
+import { EditResidentsModalComponent } from './modals/edit-residents-modal/edit-residents-modal.component';
+import { ModalService } from '../../services/modal/modal.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-residents-page',
-  imports: [CommonModule, AddResidentsModalComponent, PhoneFormatPipe, CpfFormatPipe, MainSpinnerComponent, GenericModalComponent],
+  imports: [CommonModule, AddResidentsModalComponent, EditResidentsModalComponent, PhoneFormatPipe, CpfFormatPipe, MainSpinnerComponent, GenericModalComponent],
   templateUrl: './residents-page.component.html',
   styleUrl: './residents-page.component.css'
 })
 export class ResidentsPageComponent implements OnInit {
-  [x: string]: any;
+  constructor(
+    private personService: PersonService,
+    private toastService: ToastService,
+    private modalService: ModalService
+  ) { }
 
-  constructor(private personService: PersonService, private toastService: ToastService) { }
-
+  currentModal: 'add' | 'edit' | 'view' | 'delete' | null = null;
   selectedResidentId: number | null = null;
+  private modalSub!: Subscription;
 
   showModal: boolean = true;
-  currentModal: 'add' | 'edit' | 'view' | 'delete' | null = null;
   residents: IPersonDetailed[] = [];
   isLoading: boolean = false;
   isModalLoading: boolean = false;
 
   async ngOnInit(): Promise<void> {
+    this.modalSub = this.modalService.modalState$.subscribe((state) => {
+      this.currentModal = state.name as any;
+      this.selectedResidentId = state.itemId as number | null;
+    });
+
+    this.getResidents();
     await this.getResidents();
   }
 
   openModal(modal: 'add' | 'edit' | 'view' | 'delete') {
-    this.currentModal = modal;
+    this.modalService.open(modal);
   }
 
   closeModal() {
-    this.selectedResidentId = null;
-    this.currentModal = null;
+    this.modalService.close();
   }
 
   async getResidents() {
@@ -54,9 +65,13 @@ export class ResidentsPageComponent implements OnInit {
   }
 
   setupResidentToDelete(id: number): void {
-    this.selectedResidentId = id;
-    this.openModal('delete');
+    this.modalService.open('delete', id);
   }
+
+  setupResidentToUpdate(id: number): void {
+    this.modalService.open('edit', id);
+  }
+
 
   async deleteResident(): Promise<void> {
     try {

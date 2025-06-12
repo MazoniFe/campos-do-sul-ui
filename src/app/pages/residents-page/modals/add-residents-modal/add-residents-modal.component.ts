@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
-import { CoreButtonComponent } from '../../button/button.component';
-import { MainSpinnerComponent } from "../../main-spinner/main-spinner.component";
-import { PersonService } from '../../../services/person/person.service';
-import { ToastService } from '../../../services/toast/toast.service';
+import { CoreButtonComponent } from '../../../../components/button/button.component';
+import { MainSpinnerComponent } from "../../../../components/main-spinner/main-spinner.component";
+import { PersonService } from '../../../../services/person/person.service';
+import { ToastService } from '../../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-add-residents-modal',
@@ -15,18 +15,18 @@ import { ToastService } from '../../../services/toast/toast.service';
 })
 export class AddResidentsModalComponent implements OnInit {
 
-  condominioForm!: FormGroup;
+  residentForm!: FormGroup;
   constructor(private fb: FormBuilder, private personService: PersonService, private toastService: ToastService) { }
 
   @Output() close = new EventEmitter<void>();
-  @Output() residentAdded = new EventEmitter<void>();
+  @Output() residentUpdated = new EventEmitter<void>();
 
 
   isLoading: boolean = false;
 
 
   ngOnInit() {
-    this.condominioForm = this.fb.group({
+    this.residentForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -39,7 +39,7 @@ export class AddResidentsModalComponent implements OnInit {
   async onSubmit(): Promise<void> {
     try {
       this.isLoading = true;
-      const formData = this.condominioForm.value;
+      const formData = this.residentForm.value;
       await this.personService.insert({
         cpf: formData.cpf,
         firstName: formData.firstName,
@@ -48,7 +48,7 @@ export class AddResidentsModalComponent implements OnInit {
         phone: formData.phone,
         birthDate: formData.birthDate
       });
-      this.residentAdded.emit();
+      this.residentUpdated.emit();
       this.toastService.show('success', 'Sucesso!', 'Morador registrado com Sucesso!');
     } catch (e: any) {
       console.error(e);
