@@ -22,7 +22,7 @@
                     <label for="statusFilter">Status</label>
                     <select style="width: 100%;" [(ngModel)]="selectedStatus" (change)="onStatusChange(selectedStatus)">
                         @for (item of availableStatus; track $index) {
-                        <option [ngValue]="item">{{ getStatusTranslation(item) }}</option>
+                        <option [ngValue]="item">{{ getApartmentStatusTranslation(item) }}</option>
                         }
                     </select>
                 </div>
@@ -84,7 +84,7 @@
                         </td>
                         <td>
                             <span>
-                                {{getStatusTranslation(item.status)}}
+                                {{getApartmentStatusTranslation(item.status)}}
                             </span>
                         </td>
                         <td>

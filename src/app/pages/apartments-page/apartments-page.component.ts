@@ -42,7 +42,6 @@ export class ApartmentsPageComponent implements OnInit, AfterViewInit {
 
   }
 
-
   constructor(
     private towerService: TowerService,
     private apartmentService: ApartmentService
@@ -85,7 +84,7 @@ export class ApartmentsPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getStatusTranslation(status: IApartmentStatus): string {
+  getApartmentStatusTranslation(status: IApartmentStatus): string {
     const statusTranslations = new Map<IApartmentStatus, string>([
       ['AVAILABLE', 'Livre para locação'],
       ['RENTED', 'Alugado'],

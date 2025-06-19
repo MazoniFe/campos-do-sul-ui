@@ -6,7 +6,7 @@
     }
     @if (currentModal === 'edit') {
     <div class="common-modal">
-        <app-edit-residents-modal [selectedResidentId]="selectedResidentId" (close)="closeModal()" (residentUpdated)="getResidents()"></app-edit-residents-modal>
+        <app-residents-edit-main-modal [selectedResidentId]="selectedResidentId" (closeModalEvent)="this.closeModal()"></app-residents-edit-main-modal>
     </div>
     }
     @if (currentModal === 'delete') {
@@ -21,11 +21,11 @@
 
     <div class="resident">
         <div class="header">
-            <h2>Moradores</h2>
+            <h2>Moradores / Visitantes</h2>
             <div class="actions">
-                <button (click)="openModal('add')" class="add-resident">
+                <button [disabled]="isLoading" (click)="openModal('add')" class="add-resident">
                     <span class="material-icons">add</span>
-                    Novo Morador
+                    Novo Morador/Visitante
                 </button>
             </div>
         </div>

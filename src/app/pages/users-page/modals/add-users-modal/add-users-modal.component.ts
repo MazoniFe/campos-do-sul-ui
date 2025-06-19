@@ -18,9 +18,6 @@ import { IProfile } from '../../../../services/profile/types';
   styleUrl: './add-users-modal.component.css'
 })
 export class AddUsersModalComponent implements OnInit {
-  onSelectProfileChange($event: Event) {
-    throw new Error('Method not implemented.');
-  }
 
   @Output() close = new EventEmitter<void>();
   @Output() userUpdated = new EventEmitter<void>();
@@ -48,6 +45,12 @@ export class AddUsersModalComponent implements OnInit {
 
   }
 
+
+  onSelectProfileChange($event: Event) {
+    const selectedId = Number(($event.target as HTMLSelectElement).value);
+    this.selectedProfileId = selectedId;
+  }
+
   async onSubmit(): Promise<void> {
     try {
       this.isLoading = true;
@@ -61,6 +64,8 @@ export class AddUsersModalComponent implements OnInit {
           email: formData.email,
           phone: formData.phone,
           birthDate: formData.birthDate,
+          category: 'RESIDENT',
+          apartmentId: 0
         },
         password: formData.password,
         profileId: 1
@@ -80,7 +85,7 @@ export class AddUsersModalComponent implements OnInit {
   }
 
 
-  async getProfiles() : Promise<IProfile[] | null> {
+  async getProfiles(): Promise<IProfile[] | null> {
     try {
       this.isLoading = true;
       const data = (await this.profileService.getAll()).content;
@@ -90,7 +95,7 @@ export class AddUsersModalComponent implements OnInit {
       console.error(ex);
       return null;
     }
-    finally{
+    finally {
       this.isLoading = false;
     }
   }

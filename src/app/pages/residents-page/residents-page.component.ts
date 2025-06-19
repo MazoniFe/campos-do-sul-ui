@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AddResidentsModalComponent } from "./modals/add-residents-modal/add-residents-modal.component";
-import { IPersonDetailed } from '../../services/person/types';
+import { IPerson, IPersonDetailed } from '../../services/person/types';
 import { PersonService } from '../../services/person/person.service';
 import { PhoneFormatPipe } from "../../pipes/phone-format/phone-format.pipe";
 import { CpfFormatPipe } from '../../pipes/cpf-format/cpf-format.pipe';
 import { MainSpinnerComponent } from "../../components/main-spinner/main-spinner.component";
 import { GenericModalComponent } from "../../components/modals/generic-modal/generic-modal.component";
 import { ToastService } from '../../services/toast/toast.service';
-import { EditResidentsModalComponent } from './modals/edit-residents-modal/edit-residents-modal.component';
 import { ModalService } from '../../services/modal/modal.service';
 import { Subscription } from 'rxjs';
+import { ResidentEditModalComponent } from "./modals/edit-residents-main-modal/edit-residents-main-modal.component";
 
 @Component({
   selector: 'app-residents-page',
-  imports: [CommonModule, AddResidentsModalComponent, EditResidentsModalComponent, PhoneFormatPipe, CpfFormatPipe, MainSpinnerComponent, GenericModalComponent],
+  imports: [CommonModule, AddResidentsModalComponent, PhoneFormatPipe, CpfFormatPipe, MainSpinnerComponent, GenericModalComponent, ResidentEditModalComponent],
   templateUrl: './residents-page.component.html',
   styleUrl: './residents-page.component.css'
 })
@@ -88,6 +88,4 @@ export class ResidentsPageComponent implements OnInit {
       this.isModalLoading = false;
     }
   }
-
-
 }

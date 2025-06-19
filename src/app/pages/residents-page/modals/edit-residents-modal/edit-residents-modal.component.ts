@@ -20,34 +20,28 @@ export class EditResidentsModalComponent implements OnInit {
   constructor(private fb: FormBuilder, private personService: PersonService, private toastService: ToastService) { }
 
   @Output() close = new EventEmitter<void>();
-  @Output() residentUpdated = new EventEmitter<void>();
-  @Input() selectedResidentId: number | null = null;
+  @Output() getPersonById = new EventEmitter<void>();
+  @Input() selectedPerson: IPerson | null = null;
 
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
-  async ngOnInit() {
-    this.isLoading = true
-    
+  ngOnInit() {
     this.condominioForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{2}9\d{8}$/)]],
-      birthDate: ['', Validators.required],
-      cpf: ['', Validators.required]
+      firstName: [this.selectedPerson?.firstName, Validators.required],
+      lastName: [this.selectedPerson?.lastName, Validators.required],
+      email: [this.selectedPerson?.email, [Validators.required, Validators.email]],
+      phone: [this.selectedPerson?.phone, [Validators.required, Validators.pattern(/^\d{2}9\d{8}$/)]],
+      birthDate: [this.selectedPerson?.birthDate, Validators.required],
+      cpf: [this.selectedPerson?.cpf, Validators.required]
     });
-
-    const data: IPerson | null = await this.getPerson();
-    if (data) {
-      this.condominioForm.patchValue(data);
-    }
-
     this.isLoading = false;
   }
+
   async getPerson(): Promise<IPerson | null> {
-    if (this.selectedResidentId == null) return null;
+    this.isLoading = true;
+    if (this.selectedPerson?.id == null) return null;
     try {
-      const data: IPerson = await this.personService.getById(this.selectedResidentId);
+      const data: IPerson = await this.personService.getById(this.selectedPerson.id);
       return data;
     } catch (ex: any) {
       console.error('Erro ao buscar pessoa:', ex);
@@ -57,20 +51,23 @@ export class EditResidentsModalComponent implements OnInit {
 
 
   async onSubmit(): Promise<void> {
-    if(this.selectedResidentId == null) return;
+    if(this.selectedPerson?.id == null) return;
     try {
       this.isLoading = true;
       const formData = this.condominioForm.value;
       await this.personService.update({
-        id: this.selectedResidentId,
+        id: this.selectedPerson?.id,
         cpf: formData.cpf,
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone,
-        birthDate: formData.birthDate
+        birthDate: formData.birthDate,
+        category: 'RESIDENT',
+        apartmentId: 0
       });
-      this.residentUpdated.emit();
+      
+      this.getPersonById.emit();
       this.toastService.show('success', 'Sucesso!', 'Dados do Morador foram atualizados com Sucesso!');
     } catch (e: any) {
       console.error(e);

@@ -1,9 +1,9 @@
 .modal {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-container {
@@ -13,7 +13,7 @@
   padding: 30px;
   background: white;
   border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
   font-family: sans-serif;
 }
 
@@ -78,5 +78,19 @@ button:disabled {
 .input-loading {
   pointer-events: none;
   opacity: 0.6;
-  background-color: #7c7c7c48; 
+  background-color: #7c7c7c48;
+}
+
+.dropdown-disabled select {
+  pointer-events: none;
+  opacity: 0.6;
+  background-color: #7c7c7c48;
+  cursor: not-allowed;
+}
+
+select {
+  outline: none;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }

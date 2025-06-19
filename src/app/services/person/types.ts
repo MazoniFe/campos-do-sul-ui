@@ -8,7 +8,11 @@ export interface IInsertPerson {
     email: string;
     phone: string;
     birthDate: string;
+    category: PersonCategory | null;
+    apartmentId: number | null;
 }
+
+export type PersonCategory = 'RESIDENT' | 'VISITOR';
 
 export interface IUpdatePerson {
     id: number;
@@ -18,6 +22,8 @@ export interface IUpdatePerson {
     email: string;
     phone: string;
     birthDate: string;
+    category: PersonCategory;
+    apartmentId: number;
 }
 
 export interface IPerson {

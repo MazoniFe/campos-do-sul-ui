@@ -1,0 +1,394 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.resident-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.resident-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-container {
+  position: relative;
+}
+
+.avatar-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.resident-details h2 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.resident-badge {
+  background-color: #3b82f6;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.edit-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid #d1d5db;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #374151;
+  font-size: 14px;
+  transition: all 0.2s;
+  margin-right: 60px;
+}
+
+.edit-button:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+/* Contact Information */
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  padding: 24px;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.contact-item svg {
+  color: #9ca3af;
+}
+
+.content-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.counter {
+  background-color: #e5e7eb;
+  color: #6b7280;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #111827;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.add-button:hover {
+  background-color: #374151;
+}
+
+
+.properties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.property-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  background: white;
+  transition: all 0.2s;
+}
+
+.property-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.property-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.property-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.property-info svg {
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.property-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.property-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.property-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.action-btn.delete:hover {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+/* Badges */
+.property-badges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge.ativo {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badge.proprietario {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+.badge.inquilino {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge.autorizado {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badge.frequente {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badge.temporario {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge.eventual {
+  background-color: #f3e8ff;
+  color: #6b21a8;
+}
+
+.badge.pendente {
+  background-color: #fed7aa;
+  color: #c2410c;
+}
+
+.property-date {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.authorization-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.authorization-details p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+
+.footer-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  padding: 24px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.stat-number.blue {
+  color: #3b82f6;
+}
+
+.stat-number.green {
+  color: #10b981;
+}
+
+.stat-number.orange {
+  color: #f59e0b;
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    margin: 10px;
+    max-height: calc(100vh - 20px);
+  }
+
+  .content-sections {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .resident-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .footer-stats {
+    gap: 24px;
+    padding: 16px;
+  }
+
+  .stat-number {
+    font-size: 24px;
+  }
+}
